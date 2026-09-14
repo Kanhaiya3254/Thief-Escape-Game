@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#080b14">
+  <title>Thief Escape - Don't Get Caught!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="game-shell">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon">◆</div>
+        <div>
+          <strong>THIEF ESCAPE</strong>
+          <span>DON'T GET CAUGHT</span>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <span>LEVEL</span>
+          <b id="levelText">01</b>
+        </div>
+
+        <div class="stat">
+          <span>COINS</span>
+          <b>🪙 <span id="coinText">0</span></b>
+        </div>
+
+        <div class="timer-box">
+          <div class="timer-ring">
+            <span id="timerText">30</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- GAME -->
+    <main class="game-area">
+
+      <div class="museum-label">
+        <span>⚠</span>
+        SECURITY ACTIVE
+      </div>
+
+      <div id="gameBoard">
+
+        <!-- Decorative museum elements -->
+        <div class="wall-light light-one"></div>
+        <div class="wall-light light-two"></div>
+
+        <div class="painting painting-one">
+          <span>THE<br>MASTER</span>
+        </div>
+
+        <div class="painting painting-two">
+          <span>ROYAL<br>GOLD</span>
+        </div>
+
+        <!-- Exit -->
+        <div id="exit" class="exit">
+          <div class="exit-glow"></div>
+          <div class="exit-door">
+            <span>EXIT</span>
+            <small>LOCKED</small>
+          </div>
+        </div>
+
+        <!-- Key -->
+        <div id="key" class="collectible key-item">
+          <div class="key-glow"></div>
+          🔑
+        </div>
+
+        <!-- Diamond -->
+        <div id="diamond" class="collectible diamond-item hidden">
+          <div class="diamond-glow"></div>
+          💎
+        </div>
+
+        <!-- Coins -->
+        <div class="coin coin-one">🪙</div>
+        <div class="coin coin-two">🪙</div>
+
+        <!-- Obstacles -->
+        <div class="obstacle obstacle-one"></div>
+        <div class="obstacle obstacle-two"></div>
+        <div class="obstacle obstacle-three"></div>
+
+        <!-- Guard -->
+        <div id="guardVision" class="guard-vision"></div>
+
+        <div id="guard" class="guard">
+          <div class="guard-body">
+            <div class="guard-head">
+              <div class="guard-cap"></div>
+              <div class="guard-face">
+                <i></i>
+                <i></i>
+              </div>
+            </div>
+            <div class="guard-torso">
+              <span>SECURITY</span>
+            </div>
+            <div class="guard-leg left"></div>
+            <div class="guard-leg right"></div>
+          </div>
+          <div class="guard-alert">!</div>
+        </div>
+
+        <!-- Player -->
+        <div id="player" class="player">
+          <div class="player-shadow"></div>
+          <div class="player-body">
+            <div class="player-head"></div>
+            <div class="player-coat"></div>
+            <div class="player-leg left"></div>
+            <div class="player-leg right"></div>
+          </div>
+        </div>
+
+        <div id="safeMessage" class="safe-message">
+          <span>●</span> HIDDEN
+        </div>
+
+      </div>
+
+      <!-- CONTROL -->
+      <div class="control-panel">
+        <div class="instruction">
+          <span id="instructionIcon">👆</span>
+          <span id="instructionText">Drag the thief behind objects to stay hidden</span>
+        </div>
+
+        <div class="progress">
+          <div id="progressBar"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- START OVERLAY -->
+    <section id="startScreen" class="overlay active">
+      <div class="overlay-card">
+
+        <div class="game-logo">
+          <div class="logo-diamond">◆</div>
+          <h1>THIEF<br><span>ESCAPE</span></h1>
+        </div>
+
+        <p class="tagline">Steal the diamond. Outsmart the guard.</p>
+
+        <div class="mission-card">
+          <div class="mission-number">MISSION 01</div>
+          <h2>MUSEUM HEIST</h2>
+
+          <div class="mission-steps">
+            <div>
+              <span>🔑</span>
+              <small>GET KEY</small>
+            </div>
+            <div class="arrow">→</div>
+            <div>
+              <span>💎</span>
+              <small>STEAL GEM</small>
+            </div>
+            <div class="arrow">→</div>
+            <div>
+              <span>🚪</span>
+              <small>ESCAPE</small>
+            </div>
+          </div>
+        </div>
+
+        <button id="startButton" class="primary-button">
+          <span>START HEIST</span>
+          <b>→</b>
+        </button>
+
+        <div class="mini-tip">
+          <span>💡</span>
+          Stay outside the guard's red vision
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SUCCESS -->
+    <section id="successScreen" class="overlay">
+      <div class="overlay-card success-card">
+
+        <div class="success-icon">✓</div>
+
+        <div class="success-label">MISSION COMPLETE</div>
+        <h1>YOU ESCAPED!</h1>
+        <p>The diamond is yours.</p>
+
+        <div class="reward-box">
+          <div>
+            <span>REWARD</span>
+            <strong>+500 🪙</strong>
+          </div>
+          <div>
+            <span>TIME BONUS</span>
+            <strong id="timeBonus">+0</strong>
+          </div>
+        </div>
+
+        <button id="nextButton" class="primary-button">
+          NEXT LEVEL <b>→</b>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- GAME OVER -->
+    <section id="gameOverScreen" class="overlay">
+      <div class="overlay-card danger-card">
+
+        <div class="danger-icon">!</div>
+
+        <div class="danger-label">CAUGHT</div>
+        <h1>ALARM TRIGGERED</h1>
+        <p>The guard spotted you.</p>
+
+        <div class="caught-line">
+          🚨 SECURITY ALERT 🚨
+        </div>
+
+        <button id="retryButton" class="primary-button">
+          TRY AGAIN <b>↻</b>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="ctaScreen" class="overlay">
+      <div class="overlay-card cta-card">
+
+        <div class="cta-badge">YOU'RE A PRO</div>
+
+        <div class="big-gem">💎</div>
+
+        <h1>READY FOR<br><span>THE BIG HEIST?</span></h1>
+
+        <p>More guards. More traps.<br>More legendary loot.</p>
+
+        <button id="playNowButton" class="primary-button">
+          PLAY NOW <b>→</b>
+        </button>
+
+        <small class="powered">THIEF ESCAPE</small>
+
+      </div>
+    </section>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
